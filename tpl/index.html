@@ -1,0 +1,61 @@
+<html>
+    <script src="/static/socket.io.js"></script>
+    <script>
+    const socket = io("?app_id=11223123&token=asdfasdf&loginId=asdfadsf&pl=h5")
+    room = "c68cefbe650195f03d3a6e22a86841f6"
+    // console.log(socket)
+
+    // io.use((socket, next) => {
+    //     let token = socket.handshake.query.token;
+    //     if (isValid(token)) {
+    //     return next();
+    //     }
+    //     return next(new Error('authentication error'));
+    // });
+
+      // then
+    socket.on('connect', (sock) => {
+        // console.log('connection')
+        // console.log(sock)
+    });
+
+    // socket.on('message', (message) => {
+    //     console.log(message)
+    // });
+
+    // socket.on('chat message', (message) => {
+    //     console.log("chat", message)
+    // });
+
+    // socket.on('enter room', (message) => {
+    //     console.log("chat", message)
+    // });
+
+    socket.on(room, (message) => {
+        console.log(room, message)
+    });
+    
+    console.log('finish')
+
+    function enterRoom() {
+        console.log("event enter room")
+        socket.emit('enter room', JSON.stringify({room: room}))
+    }
+
+    function leaveRoom() {
+        console.log("event leave room")
+        socket.emit('leave room', JSON.stringify({room: room}))
+    }
+
+    // document.getElementById("room").innerHTML=room
+    </script>
+
+    <body>
+        Test socketio 
+        <br/>
+        <button onclick="enterRoom()">enter room</button>
+        <br/>
+        <br/>
+        <button onclick="leaveRoom()">leave room</button>
+    </body>
+</html>
